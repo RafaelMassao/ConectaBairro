@@ -1,12 +1,10 @@
-import { defineConfig } from "@playwright/test";
+import { createLovableConfig } from "lovable-agent-playwright-config/config";
 
-export default defineConfig({
-  testDir: "./tests",
-  fullyParallel: true,
-  retries: process.env.CI ? 2 : 0,
-  reporter: "html",
-  use: {
-    baseURL: "http://localhost:8080",
-    trace: "on-first-retry",
-  },
+export default createLovableConfig({
+  // Add your custom playwright configuration overrides here
+  // Example:
+  // timeout: 60000,
+  // use: {
+  //   baseURL: 'http://localhost:3000',
+  // },
 });
