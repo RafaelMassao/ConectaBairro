@@ -41,6 +41,8 @@ const quickCategories = [
   { slug: 'perdidos', label: 'Perdidos', icon: SearchIcon, color: 'bg-accent text-accent-foreground' },
 ];
 
+const URGENT_FILTER = '__urgent__';
+
 const HomePage = () => {
   const {
     regiaoSelecionada, setRegiao, searchQuery, setSearchQuery,
@@ -83,7 +85,9 @@ const HomePage = () => {
 
   const filteredAnuncios = useMemo(() => {
     return anuncios.filter((a) => {
-      if (categoriaFiltro && categoriaFiltro !== '__all__') {
+      if (categoriaFiltro === URGENT_FILTER && !a.urgente) return false;
+
+      if (categoriaFiltro && categoriaFiltro !== '__all__' && categoriaFiltro !== URGENT_FILTER) {
         const cat = categorias.find(c => c.id === categoriaFiltro);
         if (cat && a.categorias?.slug !== cat.slug && a.categoria_id !== categoriaFiltro) return false;
       }
@@ -295,8 +299,9 @@ const HomePage = () => {
           <div className="grid grid-cols-5 gap-2">
             {quickCategories.map(({ slug, label, icon: Icon, color }) => {
               const isAll = slug === '__all__';
+              const isUrgentCategory = slug === 'emergenciais';
               const cat = !isAll ? categorias.find(c => c.slug === slug) : null;
-              const catId = isAll ? '__all__' : (cat?.id || slug);
+              const catId = isAll ? '__all__' : (isUrgentCategory ? URGENT_FILTER : (cat?.id || slug));
               return (
             <button
               key={slug}
@@ -321,6 +326,8 @@ const HomePage = () => {
             <h2 className="font-display text-xs font-semibold uppercase tracking-wider text-muted-foreground">
               {categoriaFiltro === '__all__'
                 ? 'Todos os Anúncios'
+                : categoriaFiltro === URGENT_FILTER
+                  ? 'Emergências'
                 : categoriaFiltro
                   ? `${categorias.find((c) => c.id === categoriaFiltro)?.nome || 'Anúncios'}`
                   : 'Anúncios Recentes'}
