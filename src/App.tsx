@@ -25,6 +25,7 @@ import ProfilePage from "@/pages/Profile";
 import NotFound from "@/pages/NotFound";
 import NotificationsPage from "@/pages/Notifications";
 import AdminPage from "@/pages/Admin";
+import LandingPage from "@/pages/Landing";
 
 const queryClient = new QueryClient();
 
@@ -164,7 +165,7 @@ const App = () => (
             <Route path="/settings" element={<ProtectedRoute><SettingsPage /></ProtectedRoute>} />
             <Route path="/notifications" element={<ProtectedRoute><NotificationsPage /></ProtectedRoute>} />
             <Route path="/admin" element={<ProtectedRoute><AdminPage /></ProtectedRoute>} />
-            <Route path="/" element={<Navigate to="/auth" replace />} />
+            <Route path="/" element={<LandingPage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </AuthListener>
