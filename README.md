@@ -33,43 +33,6 @@ A aplicação ficará disponível em `http://localhost:8080`.
 
 ## Deploy na Vercel
 
-### Opção 1: Deploy pela interface da Vercel (recomendado)
-
-1. Faça push do repositório para GitHub/GitLab/Bitbucket.
-2. Entre em [vercel.com](https://vercel.com) com sua conta.
-3. Clique em **Add New... > Project**.
-4. Importe este repositório.
-5. Confirme as configurações (a Vercel deve detectar Vite automaticamente):
-   - **Build Command**: `npm run build`
-   - **Output Directory**: `dist`
-6. Clique em **Deploy**.
-
-### Opção 2: Deploy via CLI
-
-```sh
-npm i -g vercel
-vercel login
-vercel
-```
-
-No primeiro deploy via CLI, confirme:
-- Framework: **Vite**
-- Build command: `npm run build`
-- Output directory: `dist`
-
-Para deploy de produção depois:
-
-```sh
-vercel --prod
-```
-
-### Variáveis de ambiente
-
-Se seu projeto usar variáveis (`.env`), cadastre em:
-**Project Settings > Environment Variables** na Vercel.
-
-### Observações
-
-- Este projeto já possui `vercel.json` com fallback para `index.html`, útil para rotas client-side (SPA).
-- Caso use React Router com rotas como `/sobre` ou `/perfil`, esse fallback evita erro 404 ao atualizar a página.
-
+- O projeto usa o entrypoint padrão do Vite em `index.html`: `"src/main.tsx"`.
+- Se o deploy falhar com `Rollup failed to resolve import "./src/main.tsx"` ou `"src/main.tsx"`, verifique se a pasta `src/` e os arquivos `src/main.tsx`, `src/App.tsx` e `src/index.css` estão versionados no repositório.
+- Avisos `npm warn deprecated ...` durante instalação não costumam quebrar o build por si só; normalmente são avisos de dependências transitivas.
