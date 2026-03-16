@@ -30,3 +30,9 @@ A aplicação ficará disponível em `http://localhost:8080`.
 - TypeScript
 - Vite
 - Tailwind CSS
+
+## Deploy na Vercel
+
+- O projeto usa o entrypoint padrão do Vite em `index.html`: `"src/main.tsx"`.
+- Se o deploy falhar com `Rollup failed to resolve import "./src/main.tsx"` ou `"src/main.tsx"`, verifique se a pasta `src/` e os arquivos `src/main.tsx`, `src/App.tsx` e `src/index.css` estão versionados no repositório.
+- Avisos `npm warn deprecated ...` durante instalação não costumam quebrar o build por si só; normalmente são avisos de dependências transitivas.
